@@ -28,8 +28,8 @@ A provenance-aware context protocol for multi-agent AI systems, designed for **E
 |:-----------|:-----------|:-----------|
 | [**jhcontext-protocol**](https://github.com/jhcontext/jhcontext-protocol) | JSON-LD specification (v0.5). Defines the envelope structure, UserML-correct SituationalStatement shape (Heckmann five-tuple mainpart), forwarding policies, and W3C PROV provenance mappings. | `jhcontext-core.jsonld` |
 | [**jhcontext-sdk**](https://github.com/jhcontext/jhcontext-sdk) | Python SDK. EnvelopeBuilder, ForwardingEnforcer, StepPersister, PROV graph builder, PII tokenization, audit functions, FastAPI server, and MCP server. | `pip install jhcontext` |
-| [**jhcontext-usecases**](https://github.com/jhcontext/jhcontext-usecases) | Lightweight proof-of-concept. Healthcare (Art. 14 temporal oversight) and Education (Art. 13 negative proof) scenarios with a 7-benchmark suite. Runs in ~25 ms, no infrastructure needed. | `python -m usecases.run` |
-| [**jhcontext-crewai**](https://github.com/jhcontext/jhcontext-crewai) | Production deployment on AWS. CrewAI multi-agent flows for Healthcare, Education, Recommendation, and Finance with Chalice Lambda API, DynamoDB, and S3 storage. | `docs/architecture.md` |
+| [**jhcontext-usecases**](https://github.com/jhcontext/jhcontext-usecases) | Lightweight proof-of-concept. Healthcare (Art. 14 temporal oversight), Education (Art. 13 negative proof), and Hiring (Art. 5(1)(f)/(g) prohibited practice + Annex III §4(a) sourcing neutrality + Art. 26 deployer obligations) scenarios with a 7-benchmark suite. Runs in ~25 ms, no infrastructure needed. | `python -m usecases.run` |
+| [**jhcontext-crewai**](https://github.com/jhcontext/jhcontext-crewai) | Production deployment on AWS. CrewAI multi-agent flows for Healthcare, Education, Recommendation, Finance, and Hiring (six-task pipeline with `output_pydantic=FlatEnvelope` and `ForwardingEnforcer` between every handoff) with Chalice Lambda API, DynamoDB, and S3 storage. | `docs/architecture.md` |
 
 ## What the Protocol Does
 
@@ -54,6 +54,13 @@ Six auditable operations, each demonstrated end-to-end in the usecases and crewa
 | Integrity verification | General | SHA-256 hash and Ed25519 signature over canonical JSON-LD remain valid |
 | Rubric grounding | Art. 12 + Art. 86 | Every LLM feedback sentence binds to a rubric criterion and cites an evidence span in the student text |
 | Multimodal binding | Art. 12 | Audio / image / video artifact citations resolve to the exact region in the referenced source |
+| No prohibited practice | Art. 5(1)(f)/(g) | No model in the pipeline declares workplace-emotion inference or protected-attribute biometric categorisation |
+| Sourcing neutrality | Annex III §4(a) | No prohibited ad-targeting parameter appears in the sourcing decision's PROV chain |
+| Workforce / candidate notice | Art. 26(7) + Art. 26(11) | Collective-notice and per-candidate notice attestations are present, signed, and pre-decision |
+| AI literacy attestation | Arts. 4 / 14(4) | The human overseer's competence record is bound to the oversight activity |
+| Input-data attestation | Art. 26(4) | Every model-bearing artifact carries a data-governance attestation (representativeness for the role family) |
+| Incident attestation | Art. 26(5) + Art. 73 | Each model-suspension activity has a downstream notification activity within 15 calendar days |
+| Four-fifths disparate impact | EEOC / NYC LL144 | Protected vs. reference advancement-rate ratio is computed corpus-wide; <0.8 surfaces a violation |
 
 ## Quick Start
 
