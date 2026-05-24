@@ -2,11 +2,36 @@
   <img src="banner.jpg" alt="jhcontext — PAC-AI: Provenance-Aware Context for Auditable Multi-Agent AI Systems" width="100%" />
 </p>
 
-A provenance-aware context protocol for multi-agent AI systems, designed for **EU AI Act compliance**. jhcontext defines how AI agents exchange, audit, and prove the integrity of context — from specification to production deployment.
+**jhcontext** is a research programme and reference implementation for **PAC-AI** — a provenance-aware context protocol for auditable multi-agent AI systems, designed for **EU AI Act compliance** and adjacent regulatory regimes (FDA SaMD, MDR / MHRA, HIPAA / GDPR, NYC LL144).
+
+PAC-AI specifies how AI agents exchange, audit, and prove the integrity of context — from specification, through SDK, into production deployment.
 
 ---
 
-## How It Fits Together
+## Research portfolio
+
+PAC-AI is being instantiated across regulated domains, each one a peer-reviewed paper in its own right.
+
+**Accepted (2026)**
+
+- **PAC-AI: Provenance-Aware Context for Auditable Multi-Agent AI Systems** — IADIS International Conference on Applied Computing & Intelligent Systems 2026 *(camera-ready)*.
+- **From Explainability to Accountability: PAC-AI Envelopes for Auditable Oversight of Multi-Agent Clinical AI under the EU AI Act** — AIiH 2026 Special Session, Imperial College London (LNCS proceedings).
+- **Auditable AI Assessment: Provenance-Aware Evaluation and Feedback for Student Work** — AIET 2026 Special Session "AI-Based Evaluation and Feedback for Student Work", Zagreb.
+
+**Under review or in late preparation** (described in general terms — most are under double-blind review):
+
+- A cross-jurisdictional functional taxonomy for clinical-AI compliance stacks (US / EU / UK).
+- A design-science instantiation of PAC-AI for AI-mediated hiring under the EU AI Act and NYC Local Law 144.
+- An applied-economics cost model for EU AI Act non-compliance, and the mitigation value of provenance-aware context.
+- A formal protocol paper (context fragmentation, semantic provenance, protocol semantics).
+- A PRISMA-informed systematic survey of provenance, context, and accountability in multi-agent AI.
+- A societal-frame paper on accountability by documentation in AI decisions (the reading version is published on [jhcontext.com/research/pacai-accountability](https://jhcontext.com/research/pacai-accountability)).
+
+Full programme overview: **[jhcontext.com/research](https://jhcontext.com/research)**.
+
+---
+
+## How it fits together
 
 ```
                     jhcontext-protocol
@@ -31,7 +56,7 @@ A provenance-aware context protocol for multi-agent AI systems, designed for **E
 | [**jhcontext-usecases**](https://github.com/jhcontext/jhcontext-usecases) | Lightweight proof-of-concept. Healthcare (Art. 14 temporal oversight), Education (Art. 13 negative proof), and Hiring (Art. 5(1)(f)/(g) prohibited practice + Annex III §4(a) sourcing neutrality + Art. 26 deployer obligations) scenarios with a 7-benchmark suite. Runs in ~25 ms, no infrastructure needed. | `python -m usecases.run` |
 | [**jhcontext-crewai**](https://github.com/jhcontext/jhcontext-crewai) | Production deployment on AWS. CrewAI multi-agent flows for Healthcare, Education, Recommendation, Finance, and Hiring (six-task pipeline with `output_pydantic=FlatEnvelope` and `ForwardingEnforcer` between every handoff) with Chalice Lambda API, DynamoDB, and S3 storage. | `docs/architecture.md` |
 
-## What the Protocol Does
+## What the protocol does
 
 An **envelope** is a context container that travels between AI agents. It carries:
 
@@ -42,7 +67,7 @@ An **envelope** is a context container that travels between AI agents. It carrie
 - **Cryptographic proof** via URDNA2015 canonicalization, SHA-256 hashing, and Ed25519 signatures
 - **Privacy and compliance** blocks for PII tracking and regulatory metadata
 
-## EU AI Act Compliance
+## EU AI Act compliance
 
 Six auditable operations, each demonstrated end-to-end in the usecases and crewai repos. Every verifier is a thin wrapper over a SPARQL query against the recorded SituationReports:
 
@@ -62,7 +87,7 @@ Six auditable operations, each demonstrated end-to-end in the usecases and crewa
 | Incident attestation | Art. 26(5) + Art. 73 | Each model-suspension activity has a downstream notification activity within 15 calendar days |
 | Four-fifths disparate impact | EEOC / NYC LL144 | Protected vs. reference advancement-rate ratio is computed corpus-wide; <0.8 surfaces a violation |
 
-## Quick Start
+## Quick start
 
 ```bash
 pip install jhcontext
@@ -93,10 +118,19 @@ env = (
 )
 ```
 
+## Where PAC-AI helps
+
+The protocol is domain-general. The research programme has prioritised four regulated domains where the gap between deployed AI and contestable AI is most consequential:
+
+- **Healthcare** — multi-agent clinical AI under the EU AI Act high-risk regime: temporal oversight, event logging, post-market obligations, HL7 FHIR-mapped evidence chains.
+- **Hiring & employment** — AI-mediated hiring under EU AI Act Annex III §4(a) and NYC Local Law 144: negative-proof on protected attributes, sourcing neutrality, four-fifths disparate-impact audits.
+- **Education** — AI-supported assessment with rubric-grounded grading: every feedback sentence binds to a rubric criterion and cites an evidence span.
+- **Finance & lending** — quantified EU AI Act non-compliance exposure for European lenders, and the mitigation value of provenance-aware context.
+
 ## Links
 
-[jhcontext.com](https://jhcontext.com) ・ [YouTube](https://youtube.com/@jhcontext) ・ [Substack](https://substack.com/@jhcontext) ・ [X](https://x.com/jhcontext) ・ [Threads](https://threads.net/@jhcontext)
+[jhcontext.com](https://jhcontext.com) ・ [jhcontext.com/research](https://jhcontext.com/research) ・ [YouTube](https://youtube.com/@jhcontext) ・ [Substack](https://substack.com/@jhcontext) ・ [X](https://x.com/jhcontext) ・ [Threads](https://threads.net/@jhcontext)
 
 ---
 
-*jhcontext is a research project — reference implementation of PAC-AI, a provenance-aware context protocol.*
+*jhcontext is a research programme — reference implementation of PAC-AI, a provenance-aware context protocol for auditable multi-agent AI systems.*
